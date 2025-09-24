@@ -43,7 +43,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
         # TODO: добавьте требуемую валидацию
 
         user = self.context["request"].user
-        status = data.get("status", Advertisement._meta.get_field("status").get_default())
+        status = data.get("status", AdvertisementStatusChoices.OPEN)
 
         if status == AdvertisementStatusChoices.OPEN:
             open_ads_count = Advertisement.objects.filter(creator=user, status=AdvertisementStatusChoices.OPEN).count()
